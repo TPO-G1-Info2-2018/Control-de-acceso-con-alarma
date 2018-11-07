@@ -23,11 +23,16 @@
 int main(void) {
 
 
+	InicializarKit();
+
+	prueba();
+
     while(1) {
+
     	TimerEvent();
 
 
-    	prueba();
+
 
     }
     return 0 ;

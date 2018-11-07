@@ -11,5 +11,8 @@
 #include "Aplicacion.h"
 
 void prueba(void);
+void ON_Relay (void);
+
+//void Relays (uint8_t, uinit8_t);
 
 #endif /* FUNCIONES_H_ */

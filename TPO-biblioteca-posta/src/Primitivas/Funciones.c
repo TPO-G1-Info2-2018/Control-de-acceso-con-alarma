@@ -10,10 +10,13 @@
 void prueba(){
 
 
+	TimerStart(1, 3 , ON_Relay ,SEG);
 }
 
-void ON_Reley (){
+void ON_Relay (){
 
-	TimerStart(1, 1 , ON_Reley ,SEG);
+	int i;
+	Relays(0, ON);
 
+i++;
 }
