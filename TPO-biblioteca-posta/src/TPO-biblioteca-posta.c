@@ -13,10 +13,12 @@
 #endif
 
 #include <cr_section_macros.h>
+
 #include "Aplicacion.h"
 // TODO: insert other include files here
 
 // TODO: insert other definitions and declarations here
+
 
 int main(void) {
 
@@ -24,7 +26,9 @@ int main(void) {
     while(1) {
     	TimerEvent();
 
+
     	prueba();
+
     }
     return 0 ;
 }

@@ -16,10 +16,12 @@
 	#include "PR_UART1.h"
 	#include "DR_Timers.h"
 	#include "PR_Timers.h"
+
 	#include "Teclado_4x1.h"
 	#include "lcd.h"
 	#include "Entradas.h"
 	#include "Funciones.h"
+
 	#define TOPE 200
 
 	void InicializarKit ( void );

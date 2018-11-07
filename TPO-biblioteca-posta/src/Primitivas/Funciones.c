@@ -11,3 +11,9 @@ void prueba(){
 
 
 }
+
+void ON_Reley (){
+
+	TimerStart(1, 1 , ON_Reley ,SEG);
+
+}
