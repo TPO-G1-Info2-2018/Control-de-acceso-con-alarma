@@ -19,7 +19,6 @@ void InicializarKit(void) {
 	Inicializar_Relay();
 	Inicializar_RGB();
 	Inicializar_LEDs();
-
 	InicializarSysTick();
 	InitLCD();
 

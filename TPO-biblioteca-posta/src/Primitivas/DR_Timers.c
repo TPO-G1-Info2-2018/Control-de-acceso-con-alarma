@@ -59,7 +59,7 @@ volatile 	uint8_t  Tmr_Base[ N_TIMERS ];
  	\details Decrementa los contadores de los timers en ejecucion. Debe ser llamada periodicamente con la base de tiempos
 	\return void
 */
-void AnalizarTimers(void)
+void AnalizarTimers()
 {
 	uint32_t i;
 	for(i=0; i< N_TIMERS ; i++)
@@ -82,7 +82,7 @@ void AnalizarTimers(void)
  	\details Llama a los callbacks de los timers vencidos. Debe llamarse desde el lazo principal del programa
 	\return void
 */
-void TimerEvent(void)
+void TimerEvent()
 {
 	uint8_t i;
 	for( i=0 ; i < N_TIMERS ; i++ )

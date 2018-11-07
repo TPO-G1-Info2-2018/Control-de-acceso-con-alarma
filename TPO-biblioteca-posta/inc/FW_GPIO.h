@@ -30,10 +30,13 @@
 	#define 	PORT3			3
 	#define 	PORT4			4
 
-//	//Prototipos de función:
-//    void Inicializar_Teclado( void );
-//    void Inicializar_Relay( void );
-//    void Inicializar_RGB( void );
-//    void Inicializar_EXP1( void );
+	//Prototipos de función:
+    void Inicializar_Teclado( void );
+    void Inicializar_Relay( void );
+    void Inicializar_RGB( void );
+    void Inicializar_EXP1( void );
+    void InicializarSysTick(void);
+    void Inicializar_LEDs(void);
+    void InitLCD(void);
 
 #endif /* FW_GPIO_H_ */

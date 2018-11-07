@@ -6,7 +6,6 @@
  */
 #include "Aplicacion.h"
 
-void prueba(void);
 
 void prueba(){
 
