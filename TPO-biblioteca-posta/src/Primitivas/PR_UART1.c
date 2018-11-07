@@ -7,6 +7,7 @@
 
 #include "Aplicacion.h"
 
+#define START_TX1()	(PopTx((uint8_t*)&U1THR))
 
 // Buffer de Transmision
 uint8_t bufferTx1[TX1BUFFER_SIZE];

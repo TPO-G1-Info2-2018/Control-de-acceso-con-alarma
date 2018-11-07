@@ -14,6 +14,8 @@
 	#include "PR_UART0.h"
 	#include "FW_UART1.h"
 	#include "PR_UART1.h"
+	#include "DR_Timers.h"
+	#include "PR_Timers.h"
 
 	#define TOPE 200
 

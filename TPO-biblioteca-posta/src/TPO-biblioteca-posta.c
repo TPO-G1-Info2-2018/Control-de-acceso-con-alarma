@@ -26,6 +26,7 @@ int main(void) {
     volatile static int i = 0 ;
     // Enter an infinite loop, just incrementing a counter
     while(1) {
+    	prueba();
         i++ ;
     }
     return 0 ;

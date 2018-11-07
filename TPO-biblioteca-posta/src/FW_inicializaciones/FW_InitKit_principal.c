@@ -13,13 +13,15 @@
 //-----------------------------------------------------------------------------
 // Inicialización general del Kit de acuerdo al uso que se le dará.
 //-----------------------------------------------------------------------------
-void InicializarKit ( void )
-{
+void InicializarKit(void) {
 	InicPLL();
+	Inicializar_Teclado();
+	Inicializar_Relay();
 	Inicializar_RGB();
-	InitUART0();
-	InitUART1();
-	Inicializar_LEDXpresso();
+	Inicializar_LEDs();
+
+	InicializarSysTick();
+	InitLCD();
 
 }
 

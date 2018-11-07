@@ -38,8 +38,7 @@ void UART1_IRQHandler (void)
 		}
 		if ( iir & 0x04 ) //Data ready
 		{
-			//PushRx1((uint8_t )U1RBR );
-			procesaGPS(U1RBR);
+			PushRx1((uint8_t )U1RBR );
 		}
 
 	}
