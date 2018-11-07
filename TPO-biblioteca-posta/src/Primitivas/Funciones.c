@@ -30,4 +30,13 @@ void Tx (){
 	//TimerStart(1,2,Tx,SEG);
 
 
+	TimerStart(1, 3 , ON_Relay ,SEG);
+}
+
+void ON_Relay (){
+
+	int i;
+	Relays(0, ON);
+
+i++;
 }

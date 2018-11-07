@@ -37,6 +37,7 @@
     void Inicializar_EXP1( void );
     void InicializarSysTick(void);
     void Inicializar_LEDs(void);
+
     void InitLCD(void);
 
 #endif /* FW_GPIO_H_ */
