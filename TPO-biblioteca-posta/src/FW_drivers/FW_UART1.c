@@ -58,7 +58,7 @@ void InitUART1 (void)
 	U1LCR = 0x00000083;
 	//4.- Registros U1DLL (0x40010000) y U1DLM (0x40010004) - 9600 baudios:
 	U1DLM = 0;
-	U1DLL = 0xA3;//0xA3 para 9600
+	U1DLL = 0x1b;//0xA3 para 9600 0x1b para 57600
 	//5.- Registros PINSEL0 (0x4002C000) y PINSEL1 (0x4002C004) - habilitan las funciones especiales de los pines:
 	//TX1D : PIN ??	-> 		P0[15]	-> PINSEL0: 30:31
 	SetPINSEL(TX1,PINSEL_FUNC1);

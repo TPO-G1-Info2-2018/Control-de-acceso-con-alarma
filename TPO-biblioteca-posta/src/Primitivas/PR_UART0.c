@@ -10,6 +10,8 @@
 
 #define START_TX()	(PopTx((uint8_t*)&U0THR))
 
+//U0THR=bufferTx[tx_out]
+
 // Buffer de Transmision
 uint8_t bufferTx[TXBUFFER_SIZE];
 // Buffer de Recepcion

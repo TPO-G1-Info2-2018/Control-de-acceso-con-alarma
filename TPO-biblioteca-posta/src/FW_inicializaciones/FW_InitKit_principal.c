@@ -21,6 +21,8 @@ void InicializarKit(void) {
 	Inicializar_LEDs();
 	InicializarSysTick();
 	InitLCD();
+	InitUART1();
+	InitUART0();
 
 }
 

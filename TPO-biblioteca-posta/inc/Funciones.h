@@ -10,6 +10,6 @@
 
 #include "Aplicacion.h"
 
-void prueba(void);
+void Tx (void);
 
 #endif /* FUNCIONES_H_ */

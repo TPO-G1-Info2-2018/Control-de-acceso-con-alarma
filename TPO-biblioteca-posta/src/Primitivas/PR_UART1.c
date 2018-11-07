@@ -7,7 +7,8 @@
 
 #include "Aplicacion.h"
 
-#define START_TX1()	(PopTx((uint8_t*)&U1THR))
+#define START_TX1()	(PopTx1((uint8_t*)&U1THR))
+//U1THR=bufferTx1[tx1_out]
 
 // Buffer de Transmision
 uint8_t bufferTx1[TX1BUFFER_SIZE];
@@ -93,10 +94,10 @@ uint8_t PopRx1( uint8_t *dato )
 	return 0;	//dato sacado del buffer
 }
 
-void EnviarString1 (const char *str)
+void EnviarString1 (const char *str, uint8_t cant )
 {
 	uint32_t i;
-	for( i = 0 ; str[i] ; i++ )
+	for( i = 0 ; i<cant ; i++ )
 		PushTx1( str[i] );
 }
 

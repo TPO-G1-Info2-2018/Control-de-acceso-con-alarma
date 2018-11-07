@@ -19,12 +19,13 @@
 // TODO: insert other definitions and declarations here
 
 int main(void) {
+	InicializarKit();
 
+	Tx();
 
     while(1) {
-    	TimerEvent();
 
-    	prueba();
+    	//TimerEvent();
     }
     return 0 ;
 }
