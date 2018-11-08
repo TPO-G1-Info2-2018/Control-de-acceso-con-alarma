@@ -21,6 +21,7 @@
 	#include "lcd.h"
 	#include "Entradas.h"
 	#include "Funciones.h"
+	#include "PR_Relays.h"
 
 	#define TOPE 200
 

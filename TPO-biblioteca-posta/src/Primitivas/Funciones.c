@@ -5,6 +5,7 @@
  *      Author: ignacio
  */
 #include "Aplicacion.h"
+
 void Tx(void);
 
 void Tx (){
@@ -27,16 +28,7 @@ void Tx (){
 	EnviarString1(genimg, 12);
 
 
-	//TimerStart(1,2,Tx,SEG);
+	TimerStart(1,2,Tx,SEG);
 
-
-	TimerStart(1, 3 , ON_Relay ,SEG);
 }
 
-void ON_Relay (){
-
-	int i;
-	Relays(0, ON);
-
-i++;
-}

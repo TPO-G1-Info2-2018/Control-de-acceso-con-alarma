@@ -21,28 +21,14 @@
 
 
 int main(void) {
+
 	InicializarKit();
 
 	Tx();
 
-	InicializarKit();
-
-	prueba();
-
     while(1) {
-<<<<<<< HEAD
-=======
 
     	TimerEvent();
->>>>>>> branch 'master' of https://github.com/TPO-G1-Info2-2018/Control-de-acceso-con-alarma.git
-
-<<<<<<< HEAD
-    	//TimerEvent();
-=======
-
-
-
->>>>>>> branch 'master' of https://github.com/TPO-G1-Info2-2018/Control-de-acceso-con-alarma.git
     }
     return 0 ;
 }
