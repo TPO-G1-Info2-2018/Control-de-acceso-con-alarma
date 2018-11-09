@@ -19,6 +19,7 @@
 
 // TODO: insert other definitions and declarations here
 
+extern volatile int dato;
 
 int main(void) {
 
@@ -28,7 +29,9 @@ int main(void) {
 
     while(1) {
 
-    	TimerEvent();
+    	PopRx1(&dato);
+    	bufferpop();
+    	//TimerEvent();
     }
     return 0 ;
 }

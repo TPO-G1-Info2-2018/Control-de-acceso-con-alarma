@@ -5,8 +5,9 @@
  *      Author: ignacio
  */
 #include "Aplicacion.h"
-
+volatile int dato;
 void Tx(void);
+void bufferpop(void);
 
 void Tx (){
 
@@ -27,8 +28,14 @@ void Tx (){
 
 	EnviarString1(genimg, 12);
 
+}
 
-	TimerStart(1,2,Tx,SEG);
+void bufferpop(){
+
+	int static i=0;
+	uint8_t static datos[10];
+	datos[i]=dato;
+	i++;
 
 }
 

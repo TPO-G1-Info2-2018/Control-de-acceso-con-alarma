@@ -10,18 +10,13 @@
 #endif
 
 #include <cr_section_macros.h>
-#include <bibliotecaInfoII.h>
 
-#include "Funciones.h"
+#include "Aplicacion.h"
 
 
 int main(void) {
 
-	Inicializacion();
-
-	UART1_Inicializacion (57600);
-
-	Buzzer (OFF);
+	InicializarKit();
 
 	while(1) {
 

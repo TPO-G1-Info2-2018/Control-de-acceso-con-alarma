@@ -14,21 +14,28 @@ void Tx (){
 	genimg[1] = 0x0001ffff;
 	genimg[2] = 0x05000103;
 
-	Transmitir (UART1, genimg, 3 * sizeof(long));
-	TimerStart (0, 1, Tx , SEG);
 
 }
 
 void IniHuella (){
 
-    long genimg [3];
+	char genimg[12];
 
-    genimg[0] = 0xffff01ef;
-	genimg[1] = 0x0001ffff;
-	genimg[2] = 0x05000103;
+	genimg[0] = 0xef;
+	genimg[1] = 0x01;
+	genimg[2] = 0xff;
+	genimg[3] = 0xff;
+	genimg[4] = 0xff;
+	genimg[5] = 0xff;
+	genimg[6] = 0x01;
+	genimg[7] = 0x00;
+	genimg[8] = 0x03;
+	genimg[9] = 0x01;
+	genimg[10] = 0x00;
+	genimg[11] = 0x05;
 
-	Transmitir (UART1, genimg, 3 * sizeof(long));
-	TimerStart (0, 1, Tx , SEG);
+	EnviarString1(genimg, 12);
+	TimerStart(1,2,IniHuella,SEG);
 
 }
 
@@ -45,64 +52,6 @@ int HuellaDetectada(){
     for (j=0; j<7; j++){
 
     	rxtext[j]= -1;
-
-    }
-
-    switch (rx){
-
-		case 0x00ef:
-			rxtext[i] = rx;
-			i++;
-			break;
-
-		case 0x0001:
-			rxtext[i] = rx;
-			i++;
-			break;
-
-		case 0x0007:
-			rxtext[i] = rx;
-			i++;
-			break;
-
-		case 0x0000:
-			rxtext[i] = rx;
-			i++;
-			break;
-
-		case 0x0003:
-			rxtext[i] = rx;
-			i++;
-			break;
-
-		case 0x0002:
-			rxtext[i] = rx;
-			i++;
-			break;
-
-		case 0x000c:
-			rxtext[i] = rx;
-			i = 0;
-			if (rxtext[5] == 0x0000)
-				return 1;
-			break;
-
-		case 0x000a:
-			rxtext[i] = rx;
-			i = 0;
-			break;
-
-		case 0x000b:
-			rxtext[i] = rx;
-			i = 0;
-			break;
-
-		case 0x000d:
-			rxtext[i] = rx;
-			i = 0;
-			break;
-
-	}
 
     return 0;
 }
@@ -125,7 +74,8 @@ void IM2TZ2(){
 	Img2Tz2[11] = 0x00;
 	Img2Tz2[12] = 0x09;
 
-	Transmitir (UART1, Img2Tz2, 13 * sizeof(char));
+	EnviarString1(Img2Tz2, 13);
+
 
 }
 
@@ -146,7 +96,7 @@ void REGMODEL(){
 	RegModel[10] = 0x00;
 	RegModel[11] = 0x09;
 
-	Transmitir (UART1, RegModel, 12 * sizeof(char));
+	EnviarString1(RegModel, 12);
 
 }
 
@@ -172,7 +122,7 @@ void STORE(){
 	Store[13] = 0x00;
 	Store[14] = 0x0e + PageID;
 
-	Transmitir (UART1, Store, 15 * sizeof(char));
+	EnviarString1(Store, 15);
 
 }
 
@@ -196,7 +146,7 @@ void IMG2TZ1 (){
 	Img2Tz1[11] = 0x00;
 	Img2Tz1[12] = 0x08;
 
-	Transmitir (UART1, Img2Tz1, 13 * sizeof(char));
+	EnviarString1(Img2Tz1, 13);
 
 }
 
@@ -209,55 +159,6 @@ int VerifREGMODEL(){
 	for (j=0; j<7; j++){
 
 		rxtext[j]= -1;
-
-
-	switch (rx){
-
-		case 0x00ef:
-			rxtext[i] = rx;
-			i++;
-			break;
-
-		case 0x0001:
-			rxtext[i] = rx;
-			i++;
-			break;
-
-		case 0x0007:
-			rxtext[i] = rx;
-			i++;
-			break;
-
-		case 0x0000:
-			rxtext[i] = rx;
-			i++;
-			break;
-
-		case 0x0003:
-			rxtext[i] = rx;
-			i++;
-			break;
-
-		case 0x000a:
-			rxtext[i] = rx;
-			if(rxtext[5]==0x0000){
-				i = 0;
-				return 1;
-			}
-			i++;
-			break;
-
-		case 0x000b:
-			rxtext[i] = rx;
-			i = 0;
-			break;
-
-		case 0x0014:
-			rxtext[i] = rx;
-			i = 0;
-			break;
-
-	}
 
 
 	return 0;
@@ -275,67 +176,7 @@ int VerifIMG2TZ (){
 		rxtext[j]= -1;
 
 
-	switch (rx){
-
-			case 0x00ef:
-				rxtext[i] = rx;
-				i++;
-				break;
-
-			case 0x0001:
-				rxtext[i] = rx;
-				i++;
-				break;
-
-			case 0x0007:
-				rxtext[i] = rx;
-				i++;
-				break;
-
-			case 0x0000:
-				rxtext[i] = rx;
-				i++;
-				break;
-
-			case 0x0003:
-				rxtext[i] = rx;
-				i++;
-				break;
-
-			case 0x0015:
-				rxtext[i] = rx;
-				i++;
-				break;
-
-			case 0x0006:
-				rxtext[i] = rx;
-				i++;
-				break;
-
-			case 0x000a:
-				rxtext[i] = rx;
-				i = 0;
-				if(rxtext[5]==0x0000)
-					return 1;
-				break;
-
-			case 0x000b:
-				rxtext[i] = rx;
-				i = 0;
-				break;
-
-			case 0x0015:
-				rxtext[i] = rx;
-				i = 0;
-				break;
-
-			case 0x0022:
-				rxtext[i] = rx;
-				i = 0;
-				break;
-		}
-
-		return 0;
+	return 0;
 
 }
 
@@ -349,67 +190,5 @@ int VerifSTORE () {
 
 		rxtext[j]= -1;
 
-
-	switch (rx){
-
-			case 0x00ef:
-				rxtext[i] = rx;
-				i++;
-				break;
-
-			case 0x0001:
-				rxtext[i] = rx;
-				i++;
-				break;
-
-			case 0x0007:
-				rxtext[i] = rx;
-				i++;
-				break;
-
-			case 0x0000:
-				rxtext[i] = rx;
-				i++;
-				break;
-
-			case 0x0003:
-				rxtext[i] = rx;
-				i++;
-				break;
-
-			case 0x000b:
-				rxtext[i] = rx;
-				i++;
-				break;
-
-			case 0x0018:
-				rxtext[i] = rx;
-				i++;
-				break;
-
-			case 0x000a:
-				rxtext[i] = rx;
-				i = 0;
-				if(rxtext[5]==0x0000)
-					return 1;
-
-				break;
-
-			case 0x000b:
-				rxtext[i] = rx;
-				i = 0;
-				break;
-
-			case 0x0015:
-				rxtext[i] = rx;
-				i = 0;
-				break;
-
-			case 0x0022:
-				rxtext[i] = rx;
-				i = 0;
-				break;
-		}
-
-		return 0;
+	return 0;
 }

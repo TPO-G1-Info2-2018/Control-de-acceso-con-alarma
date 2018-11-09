@@ -1,9 +1,9 @@
 /*******************************************************************************************************************************//**
  *
- * @file		Infotronic.h
- * @brief		Declaracion de registros de seleccion de funcion del pin - PINSEL
- * @date		23-03-16
- * @author		Marcelo Trujillo
+ * @file		DR_UART.h
+ * @brief		Breve descripción del objetivo del Módulo
+ * @date		12 de oct. de 2017
+ * @author		Ing. Marcelo Trujillo
  *
  **********************************************************************************************************************************/
 
@@ -11,8 +11,9 @@
  *** MODULO
  **********************************************************************************************************************************/
 
-#ifndef DR_PINSEL_H_
-#define DR_PINSEL_H_
+#ifndef DRIVERLPC_DR_UART0_H_
+#define DRIVERLPC_DR_UART0_H_
+
 /***********************************************************************************************************************************
  *** INCLUDES GLOBALES
  **********************************************************************************************************************************/
@@ -21,24 +22,8 @@
 /***********************************************************************************************************************************
  *** DEFINES GLOBALES
  **********************************************************************************************************************************/
-#define	 PINSEL  ( ( __RW uint32_t * )  0x4002C000 )
-
-#define	 PINSEL0			PINSEL[0]
-#define	 PINSEL1			PINSEL[1]
-#define	 PINSEL2			PINSEL[2]
-#define	 PINSEL3			PINSEL[3]
-#define	 PINSEL4			PINSEL[4]
-#define	 PINSEL5			PINSEL[5]		//!< No esta en uso
-#define	 PINSEL6			PINSEL[6]		//!< No esta en uso
-#define	 PINSEL7			PINSEL[7]
-#define	 PINSEL8			PINSEL[8]		//!< No esta en uso
-#define	 PINSEL9			PINSEL[9]
-
-//!< ----------- Estados de PINSEL:
-#define	PINSEL_GPIO			0
-#define	PINSEL_FUNC1		1
-#define	PINSEL_FUNC2		2
-#define	PINSEL_FUNC3		3
+#define MAX_BUFF_RX		512
+#define MAX_BUFF_TX		512
 
 /***********************************************************************************************************************************
  *** MACROS GLOBALES
@@ -51,10 +36,14 @@
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES
  **********************************************************************************************************************************/
+// extern tipo nombreVariable;
 
 /***********************************************************************************************************************************
  *** PROTOTIPOS DE FUNCIONES GLOBALES
  **********************************************************************************************************************************/
-void SetPINSEL( uint8_t , uint8_t , uint8_t  );
-
-#endif
+void UART0_Inicializacion (uint32_t );
+void UART0_PushRX( uint8_t dato );
+int16_t UART0_PopRX( void );
+void UART0_PushTX( uint8_t dato );
+int16_t UART0_PopTX( void );
+#endif /* DRIVERLPC_DR_UART0_H_ */

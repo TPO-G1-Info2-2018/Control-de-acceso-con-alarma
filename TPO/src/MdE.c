@@ -5,16 +5,18 @@
  *      Author: max
  */
 
-#include "Defines.h"
-#include "Funciones.h"
+#include "Aplicacion.h"
 
 void MdE (){
 
+	static int Enrolamiento = 0;
+	static int Pulsador = 0;
+	static int Puerta = 0;
 	static int estado = RESET;
 
 	extern static int rx = -1;
 
-	rx = UART1_PopRX();
+	rx = PopRx1();
 
 	if (estado >= EMERGENCIA)
 		estado = RESET;
@@ -51,14 +53,6 @@ void MdE (){
 			if((Enrolamiento == ON) && (HuellaDetectada() == TRUE))
 			{
 				IMG2TZ1();
-				if(flagIMG2TZ1==1){
-					IMG2TZ2();
-
-					if(flagIMG2TZ2==1){
-						estado = ENROLANDO;
-						STORE();
-					}
-				}
 
 			}
 
@@ -67,64 +61,64 @@ void MdE (){
 		case ENROLANDO:
 
 
-			if(VerifSTORE()==1)
-			{
-
-				IniHuella ();
-				estado = REPOSO;
-
-			}
+//			if(VerifSTORE()==1)
+//			{
+//
+//				IniHuella ();
+//				estado = REPOSO;
+//
+//			}
 
 			break;
 
 		case VERIFICACION:
 
-			if((HuellaDetectada()==FALSE))
-			{
-				Huella=0();
-				IniHuella ();
-				estado = REPOSO;
-
-			}
-			if((Busqueda()==TRUE))
-			{
-				CERRADURA_ON();
-				estado = ABIERTO;
-
-			}
+//			if((HuellaDetectada()==FALSE))
+//			{
+//				Huella=0();
+//				IniHuella ();
+//				estado = REPOSO;
+//
+//			}
+//			if((Busqueda()==TRUE))
+//			{
+//				CERRADURA_ON();
+//				estado = ABIERTO;
+//
+//			}
 
 			break;
 
 		case ALARMA:
 
-			if((Pulsador_al==TRUE) && (Puerta==False))
-			{
-				Alarma_OFF();
-				Huella=0;
-				IniHuella ();
-
-				estado = REPOSO;
-
-			}
-			if((Pulsador_al==TRUE) && (Puerta==TRUE))
-			{
-				Alarma_OFF();
-				estado = ABIERTO;
-
-			}
+//			if((Pulsador_al==TRUE) && (Puerta==False))
+//			{
+//				Alarma_OFF();
+//				Huella=0;
+//				IniHuella ();
+//
+//				estado = REPOSO;
+//
+//			}
+//			if((Pulsador_al==TRUE) && (Puerta==TRUE))
+//			{
+//				Alarma_OFF();
+//				estado = ABIERTO;
+//
+//			}
 
 			break;
 
 		case ABIERTO:
 
-			if((SPuerta==FALSE))
-			{
-				CERRADURA_OFF();
-				Huella=0;
-				IniHuella ();
-				estado = REPOSO;
-
-			}
+//			if((SPuerta==FALSE))
+//			{
+//				CERRADURA_OFF();
+//				Huella=0;
+//				IniHuella ();
+//				estado = REPOSO;
+//
+//			}
 
 			break;
 
