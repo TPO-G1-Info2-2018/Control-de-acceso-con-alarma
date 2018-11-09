@@ -7,6 +7,8 @@
 
 #include "Aplicacion.h"
 
+extern uint8_t rx[1];
+
 void MdE (){
 
 	static int Enrolamiento = 0;
@@ -14,11 +16,11 @@ void MdE (){
 	static int Puerta = 0;
 	static int estado = RESET;
 
-	extern static int rx = -1;
+	static uint8_t rx[1];
 
-	rx = PopRx1();
+	PopRx1(rx);
 
-	if (estado >= EMERGENCIA)
+	if (estado >= EMERGENCY)
 		estado = RESET;
 
 	switch(estado)
@@ -27,26 +29,26 @@ void MdE (){
 		case RESET:
 
 			IniHuella ();
-			estado = REPOSO;
+			estado = STANDBY;
 			break;
 
-		case REPOSO:
+		case STANDBY:
 
 			if((HuellaDetectada() == TRUE) && (Enrolamiento == OFF))
 			{
-				TimerStop(TSensor);
+				TimerStop(Tsensor);
 				estado = VERIFICACION;
 
 			}
 			if((Pulsador == TRUE))
 			{
-				CERRADURA_ON;
+				//CERRADURA_ON;
 				estado = ABIERTO;
 
 			}
 			if((Puerta == TRUE))
 			{
-				Alarma_ON;
+				//Alarma_ON;
 				estado = ALARMA;
 
 			}

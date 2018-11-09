@@ -5,17 +5,7 @@
  *      Author: max
  */
 
-
-void Tx (){
-
-    long genimg [3];
-
-    genimg[0] = 0xffff01ef;
-	genimg[1] = 0x0001ffff;
-	genimg[2] = 0x05000103;
-
-
-}
+#include "Aplicacion.h"
 
 void IniHuella (){
 
@@ -35,23 +25,17 @@ void IniHuella (){
 	genimg[11] = 0x05;
 
 	EnviarString1(genimg, 12);
-	TimerStart(1,2,IniHuella,SEG);
+	TimerStart(Tsensor,2,IniHuella,SEG);
 
 }
 
 
 int HuellaDetectada(){
 
-    int i = 0;
-    int j = 0;
+	//static uint8_t rx[1];
 
-    static volatile int16_t rx = -1;
+	//static uint8_t trama[20];
 
-    volatile int16_t rxtext[8];
-
-    for (j=0; j<7; j++){
-
-    	rxtext[j]= -1;
 
     return 0;
 }
@@ -152,14 +136,6 @@ void IMG2TZ1 (){
 
 int VerifREGMODEL(){
 
-	volatile int16_t rxtext[8];
-
-	static volatile int j=0;
-
-	for (j=0; j<7; j++){
-
-		rxtext[j]= -1;
-
 
 	return 0;
 
@@ -167,28 +143,12 @@ int VerifREGMODEL(){
 
 int VerifIMG2TZ (){
 
-	volatile int16_t rxtext[8];
-
-	static volatile int j=0;
-
-	for (j=0; j<7; j++){
-
-		rxtext[j]= -1;
-
-
 	return 0;
 
 }
 
 int VerifSTORE () {
 
-	volatile int16_t rxtext[8];
-
-	static volatile int j=0;
-
-	for (j=0; j<7; j++){
-
-		rxtext[j]= -1;
 
 	return 0;
 }

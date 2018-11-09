@@ -14,12 +14,12 @@
 #define FALSE 0
 
 #define RESET 0
-#define REPOSO 1
+#define STANDBY 1
 #define ENROLANDO 2
 #define VERIFICACION 3
 #define ABIERTO 4
 #define ALARMA 5
-#define EMERGENCIA 6
+#define EMERGENCY 6
 
 //#define Pulsador LeerED(ENTRADA0)
 //#define Puerta LeerED(ENTRADA1)

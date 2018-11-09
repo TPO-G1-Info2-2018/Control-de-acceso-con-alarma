@@ -23,3 +23,4 @@ void REGMODEL(void);
 void STORE(void);
 int VerifSTORE (void);
 int VerifREGMODEL (void);
+int VerifIMG2TZ (void);
