@@ -1,6 +1,7 @@
 #include "RegsLPC1769.h"
 #include "KitInfo2_BaseBoard.h"
 #include "FW_GPIO.h"
+#include "PR_Relays.h"
 
 //1°)Selecciono FUNCION del pin en PINSELx.
 //void SetPINSEL (uint8_t puerto, uint8_t pin, uint8_t modo)
@@ -55,6 +56,8 @@ void Inicializar_Relay(void) {
 	SetDIR(BUZZ, SALIDA);
 
 	SetPIN(BUZZ, BUZZ_ON);  //se apaga con 1
+
+	Relays(0,OFF);
 }
 
 void Inicializar_RGB(void) {

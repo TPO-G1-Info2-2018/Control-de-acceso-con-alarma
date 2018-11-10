@@ -16,6 +16,7 @@ int Recibir(void);
 void MdE (void);
 
 void IniHuella (void);
+void IniBusqueda(void);
 int HuellaDetectada(void);
 void IMG2TZ1(void);
 void IMG2TZ2(void);
@@ -24,3 +25,4 @@ void STORE(void);
 int VerifSTORE (void);
 int VerifREGMODEL (void);
 int VerifIMG2TZ (void);
+int VerifSEARCH(void);

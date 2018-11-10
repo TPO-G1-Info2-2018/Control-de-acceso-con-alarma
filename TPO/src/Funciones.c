@@ -9,7 +9,7 @@
 
 //extern uint8_t trama[20];
 extern volatile uint8_t flag1;
-volatile uint8_t trama[20]={0};
+volatile uint8_t trama[30]={0};
 
 
 void IniHuella (){
@@ -34,21 +34,53 @@ void IniHuella (){
 
 }
 
+void IniBusqueda(){
+
+	char search[17];
+
+	search[0]=0xef;
+	search[1]=0x01;
+	search[2]=0xff;
+	search[3]=0xff;
+	search[4]=0xff;
+	search[5]=0xff;
+	search[6]=0x01;
+	search[7]=0x00;
+	search[8]=0x08;
+	search[9]=0x1b;
+	search[10]=0x01;
+	search[11]=0x00;
+	search[12]=0x00;
+	search[13]=0x00;
+	search[14]=0xa3;
+	search[15]=0x00;
+	search[16]=0xc8;
+
+	EnviarString1(search, 17);
+
+}
+
 
 int Recibir(){
 
-	static uint8_t rx[1];
+	static uint8_t rx[1]={0};
+
 	static uint8_t i=0;
 
-	if(PopRx1(rx) == 0){
+	if(PopRx1(rx) == 0 ){
 
 		trama[i] = rx[0];
-		if(i==trama[9]+9){
-			i=0;
-			flag1=1;
-		}
 		i++;
+
+		if(i==(trama[8]+9)){
+			flag1=1;
+			i=0;
+
+		}
+
 	}
+
+
 
 	return 0;
 
@@ -60,7 +92,7 @@ int HuellaDetectada(){
 	//static uint8_t i=0;
 	//
 
-	if(trama[11]==0x0a){
+	if(trama[9]==0x00){
 
 		return 1;
 
@@ -173,6 +205,8 @@ int VerifREGMODEL(){
 
 int VerifIMG2TZ (){
 
+	if(trama[9]==0)
+		return 1;
 	return 0;
 
 }
@@ -180,5 +214,14 @@ int VerifIMG2TZ (){
 int VerifSTORE () {
 
 
+	return 0;
+}
+
+int VerifSEARCH(){
+
+	if(trama[9]==0)
+		return 1;
+	if(trama[9]==0x09)
+		return 2;
 	return 0;
 }

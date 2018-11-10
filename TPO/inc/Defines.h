@@ -19,7 +19,8 @@
 #define VERIFICACION 3
 #define ABIERTO 4
 #define ALARMA 5
-#define EMERGENCY 6
+#define BUSCANDO 6
+#define EMERGENCY 7
 
 //#define Pulsador LeerED(ENTRADA0)
 //#define Puerta LeerED(ENTRADA1)

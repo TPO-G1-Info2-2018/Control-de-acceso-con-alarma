@@ -7,7 +7,7 @@
 
 #include "Aplicacion.h"
 
-//extern uint8_t rx[1];
+
 volatile uint8_t flag1=0;
 
 void MdE (){
@@ -38,13 +38,14 @@ void MdE (){
 			{
 				flag1=0;
 				TimerStop(Tsensor);
+				IMG2TZ1();
 				estado = VERIFICACION;
 
 			}
 
 			if((Enrolamiento == ON) && (HuellaDetectada() == TRUE))
 			{
-				IMG2TZ1();
+				//IMG2TZ1();
 
 			}
 
@@ -82,13 +83,13 @@ void MdE (){
 
 		case VERIFICACION:
 
-//			if((HuellaDetectada()==FALSE))
-//			{
-//				Huella=0();
-//				IniHuella ();
-//				estado = REPOSO;
-//
-//			}
+			Recibir();
+
+			if(flag1 && VerifIMG2TZ()){
+				flag1=0;
+				IniBusqueda();
+				estado=BUSCANDO;
+			}
 //			if((Busqueda()==TRUE))
 //			{
 //				CERRADURA_ON();
@@ -96,6 +97,22 @@ void MdE (){
 //
 //			}
 
+			break;
+
+		case BUSCANDO:
+
+			Recibir();
+
+			if((flag1) && (VerifSEARCH()==TRUE))
+			{
+				Relays(0,ON);
+				estado=ABIERTO;
+			}
+			if((flag1) && (VerifSEARCH()==2)){
+				flag1=0;
+				IniHuella();
+				estado=REPOSO;
+			}
 			break;
 
 		case ALARMA:
