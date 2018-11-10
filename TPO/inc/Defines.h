@@ -8,7 +8,7 @@
 #ifndef DEFINES_H_
 #define DEFINES_H_
 
-#define Tsensor 0
+#define Tsensor 1
 
 #define TRUE 1
 #define FALSE 0

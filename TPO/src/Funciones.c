@@ -7,6 +7,11 @@
 
 #include "Aplicacion.h"
 
+//extern uint8_t trama[20];
+extern volatile uint8_t flag1;
+volatile uint8_t trama[20]={0};
+
+
 void IniHuella (){
 
 	char genimg[12];
@@ -30,11 +35,36 @@ void IniHuella (){
 }
 
 
+int Recibir(){
+
+	static uint8_t rx[1];
+	static uint8_t i=0;
+
+	if(PopRx1(rx) == 0){
+
+		trama[i] = rx[0];
+		if(i==trama[9]+9){
+			i=0;
+			flag1=1;
+		}
+		i++;
+	}
+
+	return 0;
+
+}
+
 int HuellaDetectada(){
 
 	//static uint8_t rx[1];
+	//static uint8_t i=0;
+	//
 
-	//static uint8_t trama[20];
+	if(trama[11]==0x0a){
+
+		return 1;
+
+	}
 
 
     return 0;

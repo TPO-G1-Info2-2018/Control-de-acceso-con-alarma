@@ -12,7 +12,7 @@
 
 #endif /* FUNCIONES_H_ */
 
-void Tx (void);
+int Recibir(void);
 void MdE (void);
 
 void IniHuella (void);
