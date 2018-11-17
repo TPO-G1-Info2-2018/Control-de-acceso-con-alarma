@@ -10,11 +10,44 @@
 //extern uint8_t trama[20];
 extern volatile uint8_t flag1;
 volatile uint8_t trama[30]={0};
+extern volatile int estado;
 
+
+void CambioE5(){
+
+	Alarma_ON;
+	estado=ALARMA;
+}
+
+void CambioE6(){
+
+	estado=VERIFREGMODEL;
+}
+
+void CambioE4(){
+
+	estado=GUARDAR;
+}
+
+void CambioE1(){
+
+	IniHuella();
+	estado=STANDBY;
+}
+
+void CambioE2(){
+
+	estado=STANDBY;
+}
+
+void CambioE3(){
+
+	estado=BUSCANDO;
+}
 
 void IniHuella (){
 
-	char genimg[12];
+	char static genimg[12];
 
 	genimg[0] = 0xef;
 	genimg[1] = 0x01;
@@ -30,13 +63,14 @@ void IniHuella (){
 	genimg[11] = 0x05;
 
 	EnviarString1(genimg, 12);
-	TimerStart(Tsensor,2,IniHuella,SEG);
+	//TimerStart(Tsensor,2,IniHuella,SEG);
+	TimerStart(Tespera,1,CambioE2,SEG);
 
 }
 
 void IniBusqueda(){
 
-	char search[17];
+	char static search[17];
 
 	search[0]=0xef;
 	search[1]=0x01;
@@ -98,11 +132,14 @@ int HuellaDetectada(){
 
 	}
 
+	if(trama[9]==0x02)
+		return 2;
+
 
     return 0;
 }
 
-void IM2TZ2(){
+void IMG2TZ2(){
 
 	char Img2Tz2[13];
 
@@ -170,12 +207,14 @@ void STORE(){
 
 	EnviarString1(Store, 15);
 
+	PageID++;
+
 }
 
 void IMG2TZ1 (){
 
 
-	char Img2Tz1[13];
+	char static Img2Tz1[13];
 
 
 	Img2Tz1[0] = 0xef;
@@ -198,6 +237,8 @@ void IMG2TZ1 (){
 
 int VerifREGMODEL(){
 
+	if(trama[9]==0x00)
+		return 1;
 
 	return 0;
 
@@ -207,12 +248,15 @@ int VerifIMG2TZ (){
 
 	if(trama[9]==0)
 		return 1;
+
 	return 0;
 
 }
 
 int VerifSTORE () {
 
+	if(trama[9]==0x00)
+		return 1;
 
 	return 0;
 }
@@ -221,7 +265,9 @@ int VerifSEARCH(){
 
 	if(trama[9]==0)
 		return 1;
+
 	if(trama[9]==0x09)
 		return 2;
+
 	return 0;
 }

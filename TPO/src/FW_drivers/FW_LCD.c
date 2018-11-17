@@ -1,14 +1,4 @@
-/*
- * lcd.c
- *
- *  Created on: 24/09/2013
- *      Author: gabriel
- *
- * Driver de display:
- * Tiene un problema de tiempos ya que no se ejecuta bién sin el debugger.
- * Adecuar las rutinas de la cátedra a mis inicializaciones
- *
- */
+
 #include "lcd.h"
 
 volatile uint8_t Buffer_LCD[LCDBUFFER_SIZE];

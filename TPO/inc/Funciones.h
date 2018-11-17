@@ -26,3 +26,10 @@ int VerifSTORE (void);
 int VerifREGMODEL (void);
 int VerifIMG2TZ (void);
 int VerifSEARCH(void);
+void CambioE1(void); //STANDBY con IniHuella
+void CambioE2(void); //STANDBY sin IniHuella
+void CambioE3(void); //BUSCANDO
+void CambioE4(void); //GUARDAR
+void CambioE5(void); //ALARMA
+void CambioE6(void);
+

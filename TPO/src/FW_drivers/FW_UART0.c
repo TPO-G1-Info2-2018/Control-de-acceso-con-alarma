@@ -1,10 +1,3 @@
-/**
- 	\file FW_serie.c
- 	\brief Drivers de comunicacion serie
- 	\details
- 	\author Pablo Irrera Condines
- 	\date 2013.05.08
-*/
 
 #include "Aplicacion.h"
 

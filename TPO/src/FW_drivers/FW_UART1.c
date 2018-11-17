@@ -1,9 +1,3 @@
-/*
- * FW_UART.c
- *
- *  Created on: 14/10/2013
- *      Author: marcelo
- */
 
 #include "Aplicacion.h"
 

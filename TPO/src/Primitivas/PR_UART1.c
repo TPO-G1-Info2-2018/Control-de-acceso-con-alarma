@@ -11,17 +11,21 @@
 //U1THR=bufferTx1[tx1_out]
 
 // Buffer de Transmision
-uint8_t bufferTx1[TX1BUFFER_SIZE];
+uint8_t static bufferTx1[TX1BUFFER_SIZE];
 // Buffer de Recepcion
-uint8_t bufferRx1[RX1BUFFER_SIZE];
+uint8_t static bufferRx1[RX1BUFFER_SIZE];
 
 // Indices de Transmision
-uint8_t tx1_in,tx1_out;
+static uint8_t tx1_in;
+static uint8_t tx1_out;
 // Indices de Recepcion
-uint8_t rx1_in,rx1_out;
+static uint8_t rx1_in;
+static uint8_t rx1_out;
 // Flags de estado de los buffers
-uint8_t tx1_buffer_full = 0, tx1_buffer_empty = 1;
-uint8_t rx1_buffer_full = 0, rx1_buffer_empty = 1;
+static uint8_t tx1_buffer_full = 0;
+static uint8_t tx1_buffer_empty = 1;
+static uint8_t rx1_buffer_full = 0;
+static uint8_t rx1_buffer_empty = 1;
 
 extern uint8_t tx1Start;
 
@@ -94,7 +98,7 @@ uint8_t PopRx1( uint8_t *dato )
 	return 0;	//dato sacado del buffer
 }
 
-void EnviarString1 (const char *str, uint8_t cant )
+void EnviarString1 (const char *str, const uint8_t cant )
 {
 	uint32_t i;
 	for( i = 0 ; i<cant ; i++ )
