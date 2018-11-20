@@ -24,6 +24,7 @@ void ConfigLCD(void);
 uint8_t PushLCD (uint8_t dato, uint8_t control);
 int PopLCD (void);
 void Dato_LCD(void);
+void LimpiarLCD(void);
 
 extern volatile uint32_t Demora_LCD;
 

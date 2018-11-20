@@ -7,42 +7,31 @@
 
 #include "Aplicacion.h"
 
-//extern uint8_t trama[20];
-extern volatile uint8_t flag1;
+extern volatile uint8_t FlagRecibir;
+
 volatile uint8_t trama[30]={0};
+
 extern volatile int estado;
 
-
-void CambioE5(){
-
-	Alarma_ON;
-	estado=ALARMA;
-}
-
-void CambioE6(){
-
-	estado=VERIFREGMODEL;
-}
-
-void CambioE4(){
-
-	estado=GUARDAR;
-}
 
 void CambioE1(){
 
 	IniHuella();
+
 	estado=STANDBY;
+
 }
 
 void CambioE2(){
 
-	estado=STANDBY;
-}
+	char* a;
 
-void CambioE3(){
+	a = "ALARMA";
 
-	estado=BUSCANDO;
+	DisplayLCD(a,0,0);
+
+	estado = ALARMA;
+
 }
 
 void IniHuella (){
@@ -63,8 +52,6 @@ void IniHuella (){
 	genimg[11] = 0x05;
 
 	EnviarString1(genimg, 12);
-	//TimerStart(Tsensor,2,IniHuella,SEG);
-	TimerStart(Tespera,1,CambioE2,SEG);
 
 }
 
@@ -97,46 +84,28 @@ void IniBusqueda(){
 
 int Recibir(){
 
-	static uint8_t rx[1]={0};
+	static uint8_t rx[1] = {0};
 
-	static uint8_t i=0;
+	static uint8_t i = 0;
 
 	if(PopRx1(rx) == 0 ){
 
 		trama[i] = rx[0];
+
 		i++;
 
 		if(i==(trama[8]+9)){
-			flag1=1;
-			i=0;
+
+			FlagRecibir = 1;
+
+			i = 0;
 
 		}
 
 	}
 
-
-
 	return 0;
 
-}
-
-int HuellaDetectada(){
-
-	//static uint8_t rx[1];
-	//static uint8_t i=0;
-	//
-
-	if(trama[9]==0x00){
-
-		return 1;
-
-	}
-
-	if(trama[9]==0x02)
-		return 2;
-
-
-    return 0;
 }
 
 void IMG2TZ2(){
@@ -158,7 +127,6 @@ void IMG2TZ2(){
 	Img2Tz2[12] = 0x09;
 
 	EnviarString1(Img2Tz2, 13);
-
 
 }
 
@@ -213,9 +181,7 @@ void STORE(){
 
 void IMG2TZ1 (){
 
-
 	char static Img2Tz1[13];
-
 
 	Img2Tz1[0] = 0xef;
 	Img2Tz1[1] = 0x01;
@@ -235,39 +201,29 @@ void IMG2TZ1 (){
 
 }
 
-int VerifREGMODEL(){
+int VerificarTrama(){
 
-	if(trama[9]==0x00)
+	if(trama[9] == 0x00) //VALOR CORRECTO PARA TODOS LOS CASOS
 		return 1;
+
+	if(trama[9] == 0x09) //ERROR DE BUSQUEDA
+			return 2;
+
+	if(trama[9] == 0x02) //NO DETECTA DEDO
+			return 3;
 
 	return 0;
 
 }
 
-int VerifIMG2TZ (){
+void DisplayDedo(){
 
-	if(trama[9]==0)
-		return 1;
+	LimpiarLCD();
 
-	return 0;
+	char* d;
 
-}
+	d = "COLOQUE SU DEDO";
 
-int VerifSTORE () {
+	DisplayLCD(d,0,0);
 
-	if(trama[9]==0x00)
-		return 1;
-
-	return 0;
-}
-
-int VerifSEARCH(){
-
-	if(trama[9]==0)
-		return 1;
-
-	if(trama[9]==0x09)
-		return 2;
-
-	return 0;
 }

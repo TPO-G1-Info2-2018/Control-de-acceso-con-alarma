@@ -180,3 +180,8 @@ void DisplayLCD( char * msg, uint8_t r , uint8_t pos )
 	for( i = 0 ; msg[ i ] != '\0' ; i++ )
 		PushLCD( msg [ i ] , LCD_DATA );
 }
+
+void LimpiarLCD(){
+
+	PushLCD( 0x01 , LCD_CONTROL);
+}

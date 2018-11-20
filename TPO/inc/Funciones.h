@@ -14,22 +14,13 @@
 
 int Recibir(void);
 void MdE (void);
-
 void IniHuella (void);
 void IniBusqueda(void);
-int HuellaDetectada(void);
 void IMG2TZ1(void);
 void IMG2TZ2(void);
 void REGMODEL(void);
 void STORE(void);
-int VerifSTORE (void);
-int VerifREGMODEL (void);
-int VerifIMG2TZ (void);
-int VerifSEARCH(void);
+int VerificarTrama(void);
 void CambioE1(void); //STANDBY con IniHuella
-void CambioE2(void); //STANDBY sin IniHuella
-void CambioE3(void); //BUSCANDO
-void CambioE4(void); //GUARDAR
-void CambioE5(void); //ALARMA
-void CambioE6(void);
-
+void CambioE2(void); //ALARMA
+void DisplayDedo(void);
