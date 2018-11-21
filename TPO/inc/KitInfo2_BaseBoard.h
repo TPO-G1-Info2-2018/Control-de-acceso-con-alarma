@@ -68,7 +68,7 @@
 	#define		KEY4_RC		PORT1,26		//SW13
 
 	//Entradas digitales:
-	#define		IN0		PORT4,29		//GPIO4
+	#define		IN0		PORT1,31		//GPIO4
 	#define		IN1		PORT2,11		//GPIO2
 	#define		IN2		PORT1,26		//GPIO1
 
@@ -81,11 +81,6 @@
 	#define		LCD_RS		PORT2,6			//GPIO2
 	#define		LCD_BF		PORT0,28		//GPIO1
 	#define		LCD_E		PORT0,4			//GPIO0
-
-	//ADC
-	#define 	ADC5		P1,31	//ADC5	//es el pote (OJO! el plano indica ADC0)
-	#define 	ADC1		P0,24	//ADC1	//termistor
-	#define 	ADC2		P0,25	//ADC2	//entrada libre
 
 	//Comunicación serie
 	#define 	TX0			PORT0, 2	//Tx de la UART0

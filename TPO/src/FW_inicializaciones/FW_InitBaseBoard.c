@@ -37,9 +37,6 @@ void Inicializar_Teclado(void) {
 	SetPINMODE(KEY0, PINMODE_PULLUP);
 	SetPINMODE(KEY1, PINMODE_PULLUP);
 	SetPINMODE(KEY2, PINMODE_PULLUP);
-	SetPINMODE(IN0, PINMODE_PULLUP);
-	SetPINMODE(IN1, PINMODE_PULLUP);
-	SetPINMODE(IN2, PINMODE_PULLUP);
 }
 
 void Inicializar_Relay(void) {
@@ -55,7 +52,7 @@ void Inicializar_Relay(void) {
 	SetDIR(LED4, SALIDA);
 	SetDIR(BUZZ, SALIDA);
 
-	SetPIN(BUZZ, BUZZ_ON);  //se apaga con 1
+	SetPIN(BUZZ, BUZZ_OFF);  //se apaga con 1
 
 	Relays(0,OFF);
 }
@@ -77,9 +74,3 @@ void Inicializar_LEDs(void){
 	SetPIN(LEDXpresso,OFF);
 }
 
-void Inicializar_Buzzer(void){
-	SetPINSEL(BUZZ,PINSEL_GPIO);
-	SetDIR (BUZZ,SALIDA);
-	SetPIN(BUZZ,ON);
-	SetPIN(BUZZ,OFF);
-}

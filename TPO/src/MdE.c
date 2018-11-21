@@ -7,9 +7,11 @@
 
 #include "Aplicacion.h"
 
-volatile uint8_t FlagRecibir=0;
+volatile uint8_t FlagRecibir = 0;
 
-volatile int estado=RESET;
+volatile int estado = RESET;
+
+extern volatile uint8_t BufferEntradas;
 
 void MdE (){
 
@@ -19,11 +21,11 @@ void MdE (){
 
 	volatile int Enrolamiento = TecladoHW();
 
-	volatile int SPuerta = TecladoHW();
+	volatile int SPuerta = !(BufferEntradas & 0x01);
 
-	volatile int Pulsador_al = TecladoHW();
+	volatile int Pulsador_al = Teclado();
 
-	volatile int Pulsador_Apertura = TecladoHW();
+	volatile int Pulsador_Apertura = Teclado();
 
 	if (estado >= EMERGENCY)
 		estado = RESET;
@@ -43,11 +45,11 @@ void MdE (){
 
 		case STANDBY:
 
-			Recibir();
-
 			if(VerificarTrama() == TRUE && FlagRecibir == TRUE && FlagIMG2TZ1 == 0)
 			{
 				FlagRecibir = 0;
+
+				LimpiarTrama();
 
 				LimpiarLCD();
 
@@ -63,6 +65,8 @@ void MdE (){
 
 				FlagIMG2TZ1 = 0;
 
+				LimpiarTrama();
+
 				IMG2TZ2();
 
 				estado = VERIFIM2TZ2;
@@ -73,13 +77,17 @@ void MdE (){
 			{
 				FlagRecibir = 0;
 
+				LimpiarTrama();
+
 				TimerStart(Tespera,1,CambioE1,SEG);
 
 			}
 
 
-			if(Pulsador_Apertura == 4)
+			if(Pulsador_Apertura == 3)
 			{
+				TimerStop(Tespera);
+
 				LimpiarLCD();
 
 				CERRADURA_ON;
@@ -88,8 +96,10 @@ void MdE (){
 
 			}
 
-			if(SPuerta == 2)
+			if(SPuerta == ON)
 			{
+				TimerStop(Tespera);
+
 				LimpiarLCD();
 
 				char* a;
@@ -109,11 +119,11 @@ void MdE (){
 
 		case VERIFIM2TZ1:
 
-			Recibir();
-
-			if(FlagRecibir == TRUE && VerificarTrama() == TRUE && Enrolamiento == 0xFF)
+			if(FlagRecibir == TRUE && VerificarTrama() == TRUE && Enrolamiento == NO_KEY)
 			{
 				FlagRecibir = 0;
+
+				LimpiarTrama();
 
 				IniBusqueda();
 
@@ -124,6 +134,8 @@ void MdE (){
 			if(FlagRecibir == TRUE && VerificarTrama() == TRUE && Enrolamiento == ON)
 			{
 				LimpiarLCD();
+
+				LimpiarTrama();
 
 				char* b;
 
@@ -151,11 +163,11 @@ void MdE (){
 
 		case BUSCANDO:
 
-			Recibir();
-
 			if(FlagRecibir == TRUE && VerificarTrama() == TRUE)
 			{
 				FlagRecibir = 0;
+
+				LimpiarTrama();
 
 				char* p;
 
@@ -175,6 +187,8 @@ void MdE (){
 			{
 				FlagRecibir = 0;
 
+				LimpiarTrama();
+
 				char* c;
 
 				c = "DESCONOCIDO";
@@ -193,12 +207,12 @@ void MdE (){
 
 		case VERIFIM2TZ2:
 
-			Recibir();
-
 			if(FlagRecibir == TRUE && VerificarTrama() == TRUE && Enrolamiento == ON)
 			{
 
 				FlagRecibir = 0;
+
+				LimpiarTrama();
 
 				REGMODEL();
 
@@ -209,12 +223,12 @@ void MdE (){
 
 		case VERIFREGMODEL:
 
-			Recibir();
-
 			if(FlagRecibir == TRUE && VerificarTrama() == TRUE && Enrolamiento == ON)
 			{
 
 				FlagRecibir = 0;
+
+				LimpiarTrama();
 
 				STORE();
 
@@ -226,13 +240,13 @@ void MdE (){
 
 		case GUARDAR:
 
-			Recibir();
-
 			if(FlagRecibir == TRUE && VerificarTrama() == TRUE && Enrolamiento == ON)
 			{
 				FlagRecibir = 0;
 
 				FlagIMG2TZ1 = 0;
+
+				LimpiarTrama();
 
 				LimpiarLCD();
 
@@ -253,7 +267,7 @@ void MdE (){
 
 		case ALARMA:
 
-			if(Pulsador_al == 5 && SPuerta == 0xFF)
+			if(Pulsador_al == 2 && SPuerta == OFF)
 			{
 				Alarma_OFF;
 
@@ -267,7 +281,7 @@ void MdE (){
 
 			}
 
-			if(Pulsador_al == 5 && SPuerta == 2)
+			if(Pulsador_al == 2 && SPuerta == ON)
 			{
 				Alarma_OFF;
 
@@ -281,7 +295,7 @@ void MdE (){
 
 		case ABIERTO:
 
-			if(SPuerta == 0xFF && FlagPuerta == TRUE)
+			if(SPuerta == OFF && FlagPuerta == TRUE)
 			{
 				FlagPuerta = 0;
 
@@ -298,7 +312,7 @@ void MdE (){
 				estado = STANDBY;
 			}
 
-			if(SPuerta == 2)
+			if(SPuerta == ON)
 				FlagPuerta = 1;
 
 			break;

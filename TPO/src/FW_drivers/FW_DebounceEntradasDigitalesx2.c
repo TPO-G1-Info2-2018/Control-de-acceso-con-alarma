@@ -8,7 +8,7 @@
 
 #include "Aplicacion.h"
 
-volatile uint8_t BufferEntradas;			//Buffer de Entradas Digitales
+volatile uint8_t BufferEntradas = 0;			//Buffer de Entradas Digitales
 
 /**
 	\fn void Debounce(void)

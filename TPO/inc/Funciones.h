@@ -24,3 +24,5 @@ int VerificarTrama(void);
 void CambioE1(void); //STANDBY con IniHuella
 void CambioE2(void); //ALARMA
 void DisplayDedo(void);
+void AnalisisRX(void);
+void LimpiarTrama(void);

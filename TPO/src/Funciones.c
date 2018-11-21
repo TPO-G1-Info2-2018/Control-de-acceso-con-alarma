@@ -227,3 +227,11 @@ void DisplayDedo(){
 	DisplayLCD(d,0,0);
 
 }
+
+void LimpiarTrama(){
+
+	int i=0;
+
+	for(i=0;i<30;i++)
+		trama[i]=0;
+}

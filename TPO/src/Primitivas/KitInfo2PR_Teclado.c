@@ -10,7 +10,7 @@
 // Buffer de teclado
 uint8_t buffKey;
 
-uint8_t Teclado( void )
+uint8_t Teclado()
 {
 	uint8_t tecla = NO_KEY;
 

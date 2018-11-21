@@ -37,7 +37,16 @@
 #define CERRADURA_ON Relays(RELAY0, ON)
 #define CERRADURA_OFF Relays(RELAY0, OFF)
 
-#define Alarma_ON BUZZER_ON
-#define Alarma_OFF BUZZER_OFF
+#define Alarma_ON BUZZER_OFF
+#define Alarma_OFF BUZZER_ON
+
+
+#define Header 0
+#define ModuleAdress 1
+#define PackageIdent 2
+#define PackageLen 3
+#define Restante 4
+#define Final 5
+
 
 #endif /* DEFINES_H_ */
